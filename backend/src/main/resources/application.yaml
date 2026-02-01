@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: Eatwise
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: usda
+              uri: https://api.nal.usda.gov
+              predicates:
+                - Path=/usda/**
+              filters:
+                - StripPrefix=1
+                - AddRequestParameter=api_key,VZIGxejUh7NONXlgsMvTLehdswCrEDHuPYNHSIU0
+  datasource:
+    url: jdbc:postgresql://localhost:5432/eatwise
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: 27b805e3075ac0
+    password: 126d4a2357e753
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+  jpa:
+    hibernate:
+      # 'update' will create tables based on your @Entity classes automatically
+      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
+
+app:
+  fixture:
+    admin:
+      email: admin@example.com
+      password: adminpassword
+      name: Admin User
+    users:
+      - email: user1@example.com
+        password: user1password
+        name: Kyle Reese
+      - email: user2@example.com
+        password: user2password
+        name: Sarah O'Connor

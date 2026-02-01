@@ -1,0 +1,361 @@
+email,meal,calories,registrationDelta
+user2@example.com,Salad,321,-5
+peter.parker@example.com,Chicken Soup,288,-8
+john.doe@example.com,Steak,540,-1
+user1@example.com,Omelette,412,-7
+admin@example.com,Pasta,499,-3
+user2@example.com,Sandwich,376,-9
+peter.parker@example.com,Fish,420,-4
+john.doe@example.com,Pizza,610,-10
+user1@example.com,Yogurt,215,-2
+admin@example.com,Tacos,505,-6
+user2@example.com,Burrito,580,-1
+peter.parker@example.com,Sushi,450,-5
+john.doe@example.com,Cereal,310,-7
+user1@example.com,Toast,250,-3
+admin@example.com,Waffles,380,-8
+user2@example.com,Pancakes,435,-4
+peter.parker@example.com,Hamburger,620,-9
+john.doe@example.com,Muffin,350,-2
+user1@example.com,Oatmeal,290,-6
+admin@example.com,Rice Bowl,515,-10
+user2@example.com,Shrimp,405,-1
+peter.parker@example.com,Noodles,480,-5
+john.doe@example.com,Eggs Benedict,460,-7
+user1@example.com,Smoothie,300,-3
+admin@example.com,Quinoa Salad,330,-8
+user2@example.com,Chili,550,-4
+peter.parker@example.com,Turkey Sandwich,410,-9
+john.doe@example.com,Bagel,365,-2
+user1@example.com,Pudding,275,-6
+admin@example.com,Fajitas,530,-10
+user2@example.com,Lasagna,600,-1
+peter.parker@example.com,Paella,560,-5
+john.doe@example.com,Donuts,400,-7
+user1@example.com,Fruit Salad,220,-3
+admin@example.com,Kebabs,470,-8
+user2@example.com,Wraps,390,-4
+peter.parker@example.com,Gazpacho,260,-9
+john.doe@example.com,Pretzel,340,-2
+user1@example.com,Popcorn,200,-6
+admin@example.com,Curries,570,-10
+user2@example.com,Samosa,370,-1
+peter.parker@example.com,Risotto,520,-5
+john.doe@example.com,Brownie,440,-7
+user1@example.com,Sorbet,180,-3
+admin@example.com,Goulash,590,-8
+user2@example.com,Tiramisu,485,-4
+peter.parker@example.com,Crêpes,395,-9
+john.doe@example.com,Gelato,315,-2
+user1@example.com,Bruschetta,240,-6
+admin@example.com,Falafel,430,-10
+user2@example.com,Hot Dog,475,-1
+peter.parker@example.com,Clam Chowder,335,-5
+john.doe@example.com,Enchiladas,555,-7
+user1@example.com,Coleslaw,280,-3
+admin@example.com,Shepherd's Pie,585,-8
+user2@example.com,Meatloaf,605,-4
+peter.parker@example.com,Croissant,385,-9
+john.doe@example.com,Guacamole,305,-2
+user1@example.com,Trail Mix,415,-6
+admin@example.com,Pho,465,-10
+user2@example.com,Dumplings,445,-1
+peter.parker@example.com,Ramen,510,-5
+john.doe@example.com,Cheesecake,500,-7
+user1@example.com,Biscotti,230,-3
+admin@example.com,Lentil Soup,295,-8
+user2@example.com,Calzone,545,-4
+peter.parker@example.com,Moussaka,575,-9
+john.doe@example.com,Cannoli,345,-2
+user1@example.com,Deviled Eggs,265,-6
+admin@example.com,Pad Thai,535,-10
+user2@example.com,Nachos,595,-1
+peter.parker@example.com,Chili Con Carne,615,-5
+john.doe@example.com,Cupcake,398,-7
+user1@example.com,Granola Bar,245,-3
+admin@example.com,Pot Roast,630,-8
+user2@example.com,Meatball Sub,565,-4
+peter.parker@example.com,Tofu Stir-fry,425,-9
+john.doe@example.com,Eclairs,455,-2
+user1@example.com,Hard Boiled Egg,190,-6
+admin@example.com,Jambalaya,550,-10
+user2@example.com,Pulled Pork,570,-1
+peter.parker@example.com,Biscuits and Gravy,640,-5
+john.doe@example.com,Apple Pie,470,-7
+user1@example.com,Vegetable Soup,270,-3
+admin@example.com,Chicken Tikka Masala,515,-8
+user2@example.com,Spring Rolls,380,-4
+peter.parker@example.com,Gnocchi,490,-9
+john.doe@example.com,Key Lime Pie,430,-2
+user1@example.com,Pretzels,300,-6
+admin@example.com,Black Bean Burger,450,-10
+user2@example.com,Quesadilla,480,-1
+peter.parker@example.com,Lobster Roll,620,-5
+john.doe@example.com,Pecan Pie,505,-7
+user1@example.com,Cottage Cheese,235,-3
+admin@example.com,Fish Tacos,475,-8
+user2@example.com,Pho,495,-4
+peter.parker@example.com,Chow Mein,525,-9
+john.doe@example.com,Pumpkin Bread,375,-2
+user1@example.com,Apple Slices,150,-6
+admin@example.com,BBQ Ribs,650,-10
+user2@example.com,Empanadas,400,-1
+peter.parker@example.com,Shrimp Scampi,540,-5
+john.doe@example.com,Shortcake,410,-7
+user1@example.com,Hummus,310,-3
+admin@example.com,Cornbread,360,-8
+user2@example.com,Gyros,510,-4
+peter.parker@example.com,Schnitzel,580,-9
+john.doe@example.com,Baklava,460,-2
+user1@example.com,Olives,200,-6
+admin@example.com,Chili Cheese Fries,630,-10
+user2@example.com,Hushpuppies,340,-1
+peter.parker@example.com,Pot Stickers,450,-5
+john.doe@example.com,Zucchini Bread,390,-7
+user1@example.com,Carrots and Dip,250,-3
+admin@example.com,Chicken Pot Pie,590,-8
+user2@example.com,Club Sandwich,490,-4
+peter.parker@example.com,Salisbury Steak,600,-9
+john.doe@example.com,Snickerdoodle,380,-2
+user1@example.com,Almonds,320,-6
+admin@example.com,Meatloaf Sandwich,530,-10
+user2@example.com,Sweet Potato Fries,410,-1
+peter.parker@example.com,Chicken Noodle Soup,310,-5
+john.doe@example.com,Gingerbread,420,-7
+user1@example.com,Pistachios,350,-3
+admin@example.com,Beef and Broccoli,510,-8
+user2@example.com,Fish and Chips,550,-4
+peter.parker@example.com,Egg Drop Soup,280,-9
+john.doe@example.com,Molten Lava Cake,520,-2
+user1@example.com,Cheese Cubes,330,-6
+admin@example.com,Hot Wings,540,-10
+user2@example.com,Reuben Sandwich,560,-1
+peter.parker@example.com,Chicken Salad,390,-5
+john.doe@example.com,Vanilla Ice Cream,355,-7
+user1@example.com,Grapes,180,-3
+admin@example.com,Bratwurst,580,-8
+user2@example.com,Tostada,470,-4
+peter.parker@example.com,French Dip,590,-9
+john.doe@example.com,Lemon Bar,370,-2
+user1@example.com,Rice Cakes,220,-6
+admin@example.com,Pot Au Feu,520,-10
+user2@example.com,Wonton Soup,330,-1
+peter.parker@example.com,Cobb Salad,410,-5
+john.doe@example.com,Chocolate Chip Cookie,400,-7
+user1@example.com,Clementine,160,-3
+admin@example.com,Chicken Fried Steak,600,-8
+user2@example.com,Szechuan Chicken,500,-4
+peter.parker@example.com,French Onion Soup,360,-9
+john.doe@example.com,Cream Puff,430,-2
+user1@example.com,Air-Popped Popcorn,150,-6
+admin@example.com,Chili Dog,570,-10
+user2@example.com,Veggie Burger,430,-1
+peter.parker@example.com,Beef Stew,550,-5
+john.doe@example.com,Oatmeal Raisin Cookie,395,-7
+user1@example.com,Edamame,210,-3
+admin@example.com,Chicken and Waffles,610,-8
+user2@example.com,Mushroom Risotto,480,-4
+peter.parker@example.com,Greek Salad,350,-9
+john.doe@example.com,Scone,385,-2
+user1@example.com,Celery Sticks,120,-6
+admin@example.com,Shrimp Po'boy,530,-10
+user2@example.com,Corn Dog,450,-1
+peter.parker@example.com,Minestrone Soup,300,-5
+john.doe@example.com,Brown Sugar Cookie,415,-7
+user1@example.com,Pretzels and Mustard,305,-3
+admin@example.com,Chicken Caesar Salad,400,-8
+user2@example.com,Taquitos,460,-4
+peter.parker@example.com,Egg Salad Sandwich,370,-9
+john.doe@example.com,White Chocolate Macadamia,450,-2
+user1@example.com,Raisins,250,-6
+admin@example.com,Beef Wellington,640,-10
+user2@example.com,Chicken Stir Fry,490,-1
+peter.parker@example.com,Tater Tots,350,-5
+john.doe@example.com,Peanut Butter Cookie,425,-7
+user1@example.com,Beef Jerky,360,-3
+admin@example.com,Lamb Chops,580,-8
+user2@example.com,Falafel Wrap,440,-4
+peter.parker@example.com,Black Bean Soup,310,-9
+john.doe@example.com,Sugar Cookie,380,-2
+user1@example.com,Tortilla Chips,320,-6
+admin@example.com,Chicken Korma,510,-10
+user2@example.com,BLT Sandwich,420,-1
+peter.parker@example.com,Lentil Soup,290,-5
+john.doe@example.com,Red Velvet Cupcake,440,-7
+user1@example.com,Pop-Tarts,400,-3
+admin@example.com,Veal Parmesan,600,-8
+user2@example.com,Chicken Fingers,480,-4
+peter.parker@example.com,Gazpacho,260,-9
+john.doe@example.com,Snickerdoodle,380,-2
+user1@example.com,Trail Mix,415,-6
+admin@example.com,Pork Loin,550,-10
+user2@example.com,Pizza Slice,530,-1
+peter.parker@example.com,Clam Chowder,335,-5
+john.doe@example.com,Chocolate Donut,410,-7
+user1@example.com,Muffin,350,-3
+admin@example.com,Grilled Cheese,390,-8
+user2@example.com,Calamari,460,-4
+peter.parker@example.com,Coleslaw,280,-9
+john.doe@example.com,Custard,340,-2
+user1@example.com,Toast with Jam,260,-6
+admin@example.com,Fish Sticks,400,-10
+user2@example.com,Tiramisu,485,-1
+peter.parker@example.com,Quinoa Salad,330,-5
+john.doe@example.com,Flan,360,-7
+user1@example.com,Hard Boiled Egg,190,-3
+admin@example.com,Chicken Burrito,520,-8
+user2@example.com,Cheesecake,500,-4
+peter.parker@example.com,Fruit Salad,220,-9
+john.doe@example.com,Mousse,300,-2
+user1@example.com,Yogurt Parfait,280,-6
+admin@example.com,Turkey Breast,300,-10
+user2@example.com,Meatball Sub,565,-1
+peter.parker@example.com,Green Salad,200,-5
+john.doe@example.com,Baklava,460,-7
+user1@example.com,Granola,320,-3
+admin@example.com,Pork Chop,540,-8
+user2@example.com,Lasagna,600,-4
+peter.parker@example.com,Chicken Caesar Wrap,450,-9
+john.doe@example.com,Waffles,380,-2
+user1@example.com,Cereal with Milk,340,-6
+admin@example.com,Beef Stroganoff,570,-10
+user2@example.com,Chicken Noodle Soup,310,-1
+peter.parker@example.com,Steak,540,-5
+john.doe@example.com,Croissant,385,-7
+user1@example.com,Peanut Butter Sandwich,420,-3
+admin@example.com,Shrimp Scampi,540,-8
+user2@example.com,Tacos,505,-4
+peter.parker@example.com,Tomato Soup,280,-9
+john.doe@example.com,Eclairs,455,-2
+user1@example.com,Hard Boiled Egg,190,-6
+admin@example.com,Chicken Tikka Masala,515,-10
+user2@example.com,Sandwich,376,-1
+peter.parker@example.com,Chili,550,-5
+john.doe@example.com,Pecan Pie,505,-7
+user1@example.com,Oatmeal,290,-3
+admin@example.com,Spaghetti Bolognese,550,-8
+user2@example.com,Pasta,499,-4
+peter.parker@example.com,Cobb Salad,410,-9
+john.doe@example.com,Key Lime Pie,430,-2
+user1@example.com,Smoothie,300,-6
+admin@example.com,Beef Burger,600,-10
+user2@example.com,Burrito,580,-1
+peter.parker@example.com,Chicken Soup,288,-5
+john.doe@example.com,Apple Pie,470,-7
+user1@example.com,Yogurt,215,-3
+admin@example.com,Pork Roast,590,-8
+user2@example.com,Hot Dog,475,-4
+peter.parker@example.com,Salad,321,-9
+john.doe@example.com,Brownie,440,-2
+user1@example.com,Toast,250,-6
+admin@example.com,Turkey Sandwich,410,-10
+user2@example.com,Pizza,610,-1
+peter.parker@example.com,Fish,420,-5
+john.doe@example.com,Cheesecake,500,-7
+user1@example.com,Fruit Salad,220,-3
+admin@example.com,Beef Stir Fry,510,-8
+user2@example.com,Hamburger,620,-4
+peter.parker@example.com,Omelette,412,-9
+john.doe@example.com,Cupcake,398,-2
+user1@example.com,Popcorn,200,-6
+admin@example.com,Chicken Wings,530,-10
+user2@example.com,Sushi,450,-1
+peter.parker@example.com,Tacos,505,-5
+john.doe@example.com,Muffin,350,-7
+user1@example.com,Rice Bowl,515,-3
+admin@example.com,Chili Con Carne,615,-8
+user2@example.com,Shrimp,405,-4
+peter.parker@example.com,Pancakes,435,-9
+john.doe@example.com,Oatmeal,290,-2
+user1@example.com,Smoothie,300,-6
+admin@example.com,Beef and Broccoli,510,-10
+user2@example.com,Noodles,480,-1
+peter.parker@example.com,Steak,540,-5
+john.doe@example.com,Eggs Benedict,460,-7
+user1@example.com,Quinoa Salad,330,-3
+admin@example.com,Chicken Curry,500,-8
+user2@example.com,Lasagna,600,-4
+peter.parker@example.com,Cereal,310,-9
+john.doe@example.com,Bagel,365,-2
+user1@example.com,Pudding,275,-6
+admin@example.com,Beef Fajitas,530,-10
+user2@example.com,Paella,560,-1
+peter.parker@example.com,Toast,250,-5
+john.doe@example.com,Donuts,400,-7
+user1@example.com,Kebabs,470,-3
+admin@example.com,Chicken Pad Thai,535,-8
+user2@example.com,Wraps,390,-4
+peter.parker@example.com,Waffles,380,-9
+john.doe@example.com,Pretzel,340,-2
+user1@example.com,Curries,570,-6
+admin@example.com,Beef Goulash,590,-10
+user2@example.com,Samosa,370,-1
+peter.parker@example.com,Muffin,350,-5
+john.doe@example.com,Brownie,440,-7
+user1@example.com,Falafel,430,-3
+admin@example.com,Chicken Hot Dog,475,-8
+user2@example.com,Risotto,520,-4
+peter.parker@example.com,Oatmeal,290,-9
+john.doe@example.com,Tiramisu,485,-2
+user1@example.com,Meatloaf,605,-6
+admin@example.com,Beef Meatloaf,605,-10
+user2@example.com,Enchiladas,555,-1
+peter.parker@example.com,Rice Bowl,515,-5
+john.doe@example.com,Crêpes,395,-7
+user1@example.com,Guacamole,305,-3
+admin@example.com,Chicken Croissant,385,-8
+user2@example.com,Shepherd's Pie,585,-4
+peter.parker@example.com,Shrimp,405,-9
+john.doe@example.com,Gelato,315,-2
+user1@example.com,Pho,465,-6
+admin@example.com,Beef Dumplings,445,-10
+user2@example.com,Dumplings,445,-1
+peter.parker@example.com,Noodles,480,-5
+john.doe@example.com,Bruschetta,240,-7
+user1@example.com,Cheesecake,500,-3
+admin@example.com,Chicken Ramen,510,-8
+user2@example.com,Calzone,545,-4
+peter.parker@example.com,Eggs Benedict,460,-9
+john.doe@example.com,Hot Dog,475,-2
+user1@example.com,Cannoli,345,-6
+admin@example.com,Beef Calzone,545,-10
+user2@example.com,Moussaka,575,-1
+peter.parker@example.com,Smoothie,300,-5
+john.doe@example.com,Clam Chowder,335,-7
+user1@example.com,Deviled Eggs,265,-3
+admin@example.com,Chicken Moussaka,575,-8
+user2@example.com,Pot Roast,630,-4
+peter.parker@example.com,Quinoa Salad,330,-9
+john.doe@example.com,Enchiladas,555,-2
+user1@example.com,Granola Bar,245,-6
+admin@example.com,Beef Pot Roast,630,-10
+user2@example.com,Meatball Sub,565,-1
+peter.parker@example.com,Chili,550,-5
+john.doe@example.com,Coleslaw,280,-7
+user1@example.com,Hard Boiled Egg,190,-3
+admin@example.com,Chicken Meatball Sub,565,-8
+user2@example.com,Pulled Pork,570,-4
+peter.parker@example.com,Turkey Sandwich,410,-9
+john.doe@example.com,Shepherd's Pie,585,-2
+user1@example.com,Vegetable Soup,270,-6
+admin@example.com,Beef Pulled Pork,570,-10
+user2@example.com,Spring Rolls,380,-1
+peter.parker@example.com,Bagel,365,-5
+john.doe@example.com,Meatloaf,605,-7
+user1@example.com,Pretzels,300,-3
+admin@example.com,Chicken Spring Rolls,380,-8
+user2@example.com,Gnocchi,490,-4
+peter.parker@example.com,Pudding,275,-9
+john.doe@example.com,Croissant,385,-2
+user1@example.com,Black Bean Burger,450,-6
+admin@example.com,Beef Gnocchi,490,-10
+user2@example.com,Quesadilla,480,-1
+peter.parker@example.com,Fajitas,530,-5
+john.doe@example.com,Guacamole,305,-7
+user1@example.com,Cottage Cheese,235,-3
+admin@example.com,Chicken Quesadilla,480,-8
+user2@example.com,Lobster Roll,620,-4
+peter.parker@example.com,Lasagna,600,-9
+john.doe@example.com,Trail Mix,415,-2
+user1@example.com,Fish Tacos,475,-6
+admin@example.com,Beef Lobster Roll,620,-10
