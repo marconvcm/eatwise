@@ -62,7 +62,8 @@ class UserProfileServiceImpl(
             email = userProfile.email,
             password = hashedPassword,
             passwordSalt = salt,
-            isAdmin = isAdmin
+            isAdmin = isAdmin,
+            kcalThreshold = userProfile.kcalThreshold
         )
 
         return userProfileRepository.save(newProfile)

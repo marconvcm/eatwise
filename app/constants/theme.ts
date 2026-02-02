@@ -1,53 +1,109 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
+const SPACING = 44.0;
 
-import { Platform } from 'react-native';
+const STATUS_BAR_HEIGHT = 59;
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const SPACING_2X = SPACING * 2;
+const SPACING_3X = SPACING * 3;
+const SPACING_4X = SPACING * 4;
+const SPACING_5X = SPACING * 5;
 
-export const Colors = {
-  light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
-  },
-  dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
-  },
-};
+const SPACING_2F = SPACING / 2;
+const SPACING_3F = SPACING / 3;
+const SPACING_4F = SPACING / 4;
+const SPACING_5F = SPACING / 5;
 
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
-  },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
-  },
-  web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
-  },
-});
+const FONT_SIZE = 17.0;
+
+const FONT_SIZE_2X = FONT_SIZE * 2;
+const FONT_SIZE_3X = FONT_SIZE * 3;
+
+const FONT_SIZE_2F = FONT_SIZE / 2;
+const FONT_SIZE_3F = FONT_SIZE / 3;
+
+const DARK_RED = "#45040c";
+const VIVID_RED = "#720714";
+const BLACK = "#000000";
+const DARK_GREEN = "#063a21";
+const VIVID_GREEN = "#12562a";
+const SILVER = "#c0c0c0";
+
+export type ColorSetup = {
+   base: string;
+   light: string;
+   lighter: string;
+   dark: string;
+   darker: string;
+}
+
+export type ThemeColors = {
+   primary: ColorSetup;
+   secondary: ColorSetup;
+   surface: ColorSetup;
+   error: ColorSetup;
+   text: ColorSetup;
+   border: ColorSetup;
+}
+
+const COLORS: ThemeColors = {
+   primary: {
+      base: VIVID_GREEN,
+      light: "#2d8f4f",
+      lighter: "#4db06f",
+      dark: "#0d3f1e",
+      darker: "#062815",
+   },
+   secondary: {
+      base: DARK_GREEN,
+      light: "#0d5532",
+      lighter: "#147043",
+      dark: "#042915",
+      darker: "#02180d",
+   },
+   surface: {
+      base: "#ffffff",
+      light: "#f5f5f5",
+      lighter: "#fafafa",
+      dark: "#e0e0e0",
+      darker: "#d0d0d0",
+   },
+   error: {
+      base: VIVID_RED,
+      light: "#a00b1e",
+      lighter: "#d41028",
+      dark: "#4a0510",
+      darker: "#2d0309",
+   },
+   text: {
+      base: BLACK,
+      light: "#333333",
+      lighter: "#666666",
+      dark: "#000000",
+      darker: "#000000",
+   },
+   border: {
+      base: SILVER,
+      light: "#d9d9d9",
+      lighter: "#e8e8e8",
+      dark: "#a8a8a8",
+      darker: "#909090",
+   },
+}
+
+export const Theme = {
+   SPACING,
+   SPACING_2X,
+   SPACING_3X,
+   SPACING_4X,
+   SPACING_5X,
+   SPACING_2F,
+   SPACING_3F,
+   SPACING_4F,
+   SPACING_5F,
+   FONT_SIZE,
+   FONT_SIZE_2X,
+   FONT_SIZE_3X,
+   FONT_SIZE_2F,
+   FONT_SIZE_3F,
+   COLORS,
+   STATUS_BAR_HEIGHT
+}

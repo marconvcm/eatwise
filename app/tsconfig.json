@@ -1,6 +1,7 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "types": ["tamagui", "jest"],
     "strict": true,
     "paths": {
       "@/*": [

@@ -50,11 +50,13 @@ class BootstrapRunner(
             val isAdmin = (userRow["isAdmin"] ?: "").toBoolean()
             val password = userRow["password"] ?: "password"
             val accessToken = userRow["accessToken"] ?: ""
+            val kcal = userRow["kcal"]?.toLong() ?: 2100
 
             val userProfileRequest = UserProfileRequest(
                 email = email,
                 name = name,
-                password = password
+                password = password,
+                kcalThreshold = kcal,
             )
 
             if (isAdmin) {

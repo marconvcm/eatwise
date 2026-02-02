@@ -3,6 +3,7 @@ package app.py3kl.eatwise.profile.models
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import java.util.*
 
@@ -20,6 +21,8 @@ data class UserProfile(
     val name: String,
     @field:Email(message = "Invalid email format")
     val email: String,
+    @field:Min(0, message = "Kcal threshold must be non-negative")
+    val kcalThreshold: Long = 2100,
     val isAdmin: Boolean = false,
     @JsonIgnore
     val password: String = "",

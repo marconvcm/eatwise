@@ -1,24 +1,39 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
+import { AppProvider } from '@/context';
+import { Manrope_400Regular, Manrope_500Medium, Manrope_600SemiBold, Manrope_700Bold, useFonts } from '@expo-google-fonts/manrope';
+import { Stack } from "expo-router";
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { useEffect } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+   const [fontsLoaded] = useFonts({
+      Manrope_400Regular,
+      Manrope_500Medium,
+      Manrope_600SemiBold,
+      Manrope_700Bold,
+   });
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+   useEffect(() => {
+      if (fontsLoaded) {
+         SplashScreen.hideAsync();
+      }
+   }, [fontsLoaded]);
+
+   if (!fontsLoaded) {
+      return null;
+   }
+
+   return (
+      <AppProvider>
+         <SafeAreaProvider>
+            <StatusBar style="dark" />
+            <Stack>
+               <Stack.Screen name="index" options={{ headerShown: false }} />
+            </Stack>
+         </SafeAreaProvider>
+      </AppProvider>
+   );
 }
