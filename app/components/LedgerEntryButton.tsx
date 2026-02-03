@@ -2,15 +2,15 @@ import { Theme } from "@/constants/theme";
 import type { LedgerEntry } from "@/lib/ledger/types/LedgerEntry";
 import { inferEmojiFromSubject } from "@/lib/utils";
 import { StyleSheet, Text, View } from "react-native";
-import EntryButton from "./EntryButton";
+import EntryButton, { EntryButtonProps } from "./EntryButton";
 import { Typography } from "./Typography";
 
-type LedgerEntryButtonProps = {
+type LedgerEntryButtonProps = EntryButtonProps & {
   entry: LedgerEntry;
   onPress?: () => void;
 };
 
-export default function LedgerEntryButton({ entry, onPress }: LedgerEntryButtonProps) {
+export default function LedgerEntryButton({ entry, onPress, editMode, badgeText, onBadgePress, coma }: LedgerEntryButtonProps) {
   const emoji = inferEmojiFromSubject(entry.subject);
   const time = new Date(entry.registrationDate).toLocaleTimeString('en-US', {
     hour: '2-digit',
@@ -19,7 +19,7 @@ export default function LedgerEntryButton({ entry, onPress }: LedgerEntryButtonP
   });
 
   return (
-    <EntryButton onPress={onPress}>
+    <EntryButton onPress={onPress} editMode={editMode} badgeText={badgeText} onBadgePress={onBadgePress} coma={coma}>
       <View style={styles.container}>
         <Text style={styles.emoji}>{emoji}</Text>
         <View style={styles.contentContainer}>

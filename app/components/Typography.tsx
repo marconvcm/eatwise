@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
       fontSize: Theme.FONT_SIZE,
       color: Theme.COLORS.text.lighter,
       fontVariant: ['small-caps'],
-      letterSpacing: -2.5,
+      letterSpacing: -1,
    },
 });

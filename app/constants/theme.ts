@@ -7,6 +7,7 @@ const SPACING_3X = SPACING * 3;
 const SPACING_4X = SPACING * 4;
 const SPACING_5X = SPACING * 5;
 
+const SPACING_HF = SPACING / 1.5;
 const SPACING_2F = SPACING / 2;
 const SPACING_3F = SPACING / 3;
 const SPACING_4F = SPACING / 4;
@@ -95,6 +96,7 @@ export const Theme = {
    SPACING_3X,
    SPACING_4X,
    SPACING_5X,
+   SPACING_HF,
    SPACING_2F,
    SPACING_3F,
    SPACING_4F,

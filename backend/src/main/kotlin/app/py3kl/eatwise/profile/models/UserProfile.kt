@@ -11,7 +11,7 @@ import java.util.*
 @Table(
     name = "users_profile", indexes = [
         Index(name = "idx_user_email", columnList = "email", unique = true),
-        Index(name = "idx_user_access_token", columnList = "access", unique = true)
+        Index(name = "idx_user_access_token", columnList = "access_token", unique = true)
     ]
 )
 data class UserProfile(

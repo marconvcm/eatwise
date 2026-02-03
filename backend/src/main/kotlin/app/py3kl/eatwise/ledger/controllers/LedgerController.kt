@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono
 import java.util.UUID
 
 @RestController("")
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 class LedgerController(
     val ledgerEntryService: LedgerEntryService
 ) {

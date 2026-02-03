@@ -5,12 +5,14 @@
 
 import { apiClient } from '../http';
 import type {
-   FoodDetailsResponse,
-   FoodSearchCriteria,
-   FoodSearchResponse,
+  FoodDetailsResponse,
+  FoodSearchCriteria,
+  FoodSearchResponse,
 } from './types';
 
 export const FoodSearchService = {
+  autoCompleteLookupTimeoutId: null as number | null,
+
   /**
    * Search for foods using USDA FoodData Central API
    * GET /usda/fdc/v1/foods/search
@@ -96,4 +98,68 @@ export const FoodSearchService = {
   ): Promise<FoodSearchResponse> {
     return this.searchFoods(query, { dataType: dataTypes });
   },
+
+  /**
+   * Search foods for autocomplete lookup with built-in debounce
+   * Returns a key-value object where keys are fdcId and values are display labels
+   * @param value - Search query string
+   * @returns Object with fdcId as keys and formatted labels as values
+   */
+  async autoCompleteLookup(value: string): Promise<Record<string, string>> {
+    return new Promise((resolve) => {
+      if (this.autoCompleteLookupTimeoutId) {
+        clearTimeout(this.autoCompleteLookupTimeoutId);
+      }
+      
+      if (!value || value.trim().length < 2) {
+        resolve({});
+        return;
+      }
+      
+      this.autoCompleteLookupTimeoutId = setTimeout(async () => {
+        try {
+          const response = await this.searchFoods(value, { pageSize: 10 });
+          
+          const results = Object.fromEntries(
+            response.foods.map(food => [
+              food.fdcId.toString(),
+              `${food.description} (${food.brandName || food.dataType || 'Generic'})`
+            ])
+          );
+
+          resolve(results);
+        } catch (error) {
+          console.error('Autocomplete lookup failed:', error);
+          resolve({});
+        }
+      }, 300);
+    });
+  },
+
+  /**
+   * Get food details for autocomplete pickup
+   * Returns the selected food's details formatted for form population
+   * @param fdcId - The selected food's FDC ID
+   * @returns Object with subject and calories fields
+   */
+  async autoCompletePickup(fdcId: string): Promise<{ subject: string; calories: number }> {
+    try {
+      const food = await this.getFoodDetails(Number(fdcId));
+
+      const calories = food.labelNutrients?.["calories"].value ?? 0
+
+      return {
+        subject: `${food.description} (${food.brandName || food.dataType || 'Generic'})`,
+        calories: calories,
+      };
+    } catch (error) {
+      console.error('Autocomplete pickup failed:', error);
+      return {
+        subject: '',
+        calories: 0,
+      };
+    }
+  },
+
+  
 };

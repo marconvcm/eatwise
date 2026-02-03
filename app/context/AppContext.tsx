@@ -3,22 +3,37 @@
  * Provides access to all API services throughout the application
  */
 
+import { FoodSearchService } from '@/lib/food';
 import { AdminReportService } from '@/lib/ledger/adminReport.service';
 import { LedgerAdminService, LedgerService } from '@/lib/ledger/service';
+import type { LedgerEntry } from '@/lib/ledger/types/LedgerEntry';
 import { UserProfileService } from '@/lib/user/service';
-import React, { createContext, useContext, type ReactNode } from 'react';
+import React, { createContext, useContext, useState, type ReactNode } from 'react';
 
 // Re-export the debounced food search hook
 export { useDebouncedFoodSearch } from '@/lib/hooks/useDebouncedFoodSearch';
+
+interface LedgerEntryModalState {
+  isOpen: boolean;
+  currentDay: string;
+  currentEntry: LedgerEntry | null;
+}
 
 interface AppServices {
   ledger: typeof LedgerService;
   ledgerAdmin: typeof LedgerAdminService;
   adminReport: typeof AdminReportService;
   userProfile: typeof UserProfileService;
+  foodSearchService: typeof FoodSearchService;
 }
 
-const AppContext = createContext<AppServices | undefined>(undefined);
+interface AppContextValue extends AppServices {
+  ledgerEntryModal: LedgerEntryModalState;
+  openLedgerEntryModal: (day: string, entry: LedgerEntry | null) => void;
+  closeLedgerEntryModal: () => void;
+}
+
+const AppContext = createContext<AppContextValue | undefined>(undefined);
 
 interface AppProviderProps {
   children: ReactNode;
@@ -29,14 +44,43 @@ interface AppProviderProps {
  * Wraps the application and provides service access
  */
 export function AppProvider({ children }: AppProviderProps) {
+  const [ledgerEntryModal, setLedgerEntryModal] = useState<LedgerEntryModalState>({
+    isOpen: false,
+    currentDay: new Date().toISOString().split('T')[0],
+    currentEntry: null,
+  });
+
+  const openLedgerEntryModal = (day: string, entry: LedgerEntry | null) => {
+    setLedgerEntryModal({
+      isOpen: true,
+      currentDay: day,
+      currentEntry: entry,
+    });
+  };
+
+  const closeLedgerEntryModal = () => {
+    setLedgerEntryModal(prev => ({
+      ...prev,
+      isOpen: false,
+    }));
+  };
+
   const services: AppServices = {
     ledger: LedgerService,
     ledgerAdmin: LedgerAdminService,
     adminReport: AdminReportService,
     userProfile: UserProfileService,
+    foodSearchService: FoodSearchService,
   };
 
-  return <AppContext.Provider value={services}>{children}</AppContext.Provider>;
+  const contextValue: AppContextValue = {
+    ...services,
+    ledgerEntryModal,
+    openLedgerEntryModal,
+    closeLedgerEntryModal,
+  };
+
+  return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;
 }
 
 /**
@@ -44,7 +88,7 @@ export function AppProvider({ children }: AppProviderProps) {
  * @returns Object containing all API services
  * @throws Error if used outside of AppProvider
  */
-export function useAppServices(): AppServices {
+export function useAppServices(): AppContextValue {
   const context = useContext(AppContext);
   
   if (context === undefined) {

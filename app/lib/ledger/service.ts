@@ -59,8 +59,13 @@ function createLedgerService(basePath: string) {
     async getEntriesGroupedByDay(): Promise<Record<string, LedgerEntry[]>> {
       const entries = await this.getEntries();
       
+      // Get today's date in local timezone as YYYY-MM-DD
+      const today = new Date();
+      const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+      
       if (entries.length === 0) {
-        return {};
+        // Return at least today even if there are no entries
+        return { [todayKey]: [] };
       }
       
       // Find the oldest date in the collection
@@ -71,15 +76,22 @@ function createLedgerService(basePath: string) {
         if (entryDate < oldestDate) oldestDate = entryDate;
       });
       
-      // End date is always today
+      // Normalize oldest date to start of day in local timezone
+      oldestDate.setHours(0, 0, 0, 0);
+      
+      // End date is today
       const newestDate = new Date();
+      newestDate.setHours(23, 59, 59, 999);
       
       // Initialize grouped object with all dates from oldest to today
       const grouped: Record<string, LedgerEntry[]> = {};
       const currentDate = new Date(oldestDate);
       
       while (currentDate <= newestDate) {
-        const dateKey = currentDate.toISOString().split('T')[0];
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const dateKey = `${year}-${month}-${day}`;
         grouped[dateKey] = [];
         currentDate.setDate(currentDate.getDate() + 1);
       }

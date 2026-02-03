@@ -70,7 +70,7 @@ class WebFluxConfig(
                                     userProfile.email,
                                     password,
                                     if (userProfile.isAdmin) {
-                                        listOf(SimpleGrantedAuthority("ROLE_ADMIN"))
+                                        listOf(SimpleGrantedAuthority("ROLE_ADMIN"), SimpleGrantedAuthority("ROLE_USER"))
                                     } else {
                                         listOf(SimpleGrantedAuthority("ROLE_USER"))
                                     }

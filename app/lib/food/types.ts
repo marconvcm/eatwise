@@ -61,6 +61,7 @@ export interface FoodItem {
   score?: number;
   foodNutrients?: FoodNutrient[];
   foodPortions?: FoodPortion[];
+  labelNutrients?: FoodDetailLabelNutrient;
   foodAttributes?: Array<{
     id: number;
     sequenceNumber: number;
@@ -110,4 +111,10 @@ export interface FoodDetailsResponse extends FoodItem {
   }>;
   isHistoricalReference?: boolean;
   scientificName?: string;
+}
+
+export type FoodDetailLabelNutrient = {
+  [key: string]: {
+    value: number;
+  }
 }
