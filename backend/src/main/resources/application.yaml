@@ -58,3 +58,6 @@ app:
       - email: user2@example.com
         password: user2password
         name: Sarah O'Connor
+  invites:
+    provisioning:
+      interval-ms: 300000
