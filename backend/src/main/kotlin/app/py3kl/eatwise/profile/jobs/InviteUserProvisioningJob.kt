@@ -40,6 +40,8 @@ class InviteUserProvisioningJob(
 
             log.info("Provisioned user from invite for $email")
         }
+
+        userProfileInviteRepository.deleteAll(invites)
     }
 
     private fun generatePassword(): String {

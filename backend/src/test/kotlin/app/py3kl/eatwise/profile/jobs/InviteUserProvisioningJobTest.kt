@@ -47,11 +47,13 @@ class InviteUserProvisioningJobTest {
         every { userProfileService.existsByEmail(invite.targetUserEmail) } returns false
         every { userProfileService.createUserProfile(capture(requestSlot)) } returns mockk()
         every { userProfileService.setAccessTokenForUser(invite.targetUserEmail, capture(tokenSlot)) } returns Unit
+        every { userProfileInviteRepository.deleteAll(listOf(invite)) } returns Unit
 
         job.provisionUsersFromInvites()
 
         verify(exactly = 1) { userProfileService.createUserProfile(any()) }
         verify(exactly = 1) { userProfileService.setAccessTokenForUser(invite.targetUserEmail, any()) }
+        verify(exactly = 1) { userProfileInviteRepository.deleteAll(listOf(invite)) }
 
         assertEquals(invite.targetUserEmail, requestSlot.captured.email)
         assertEquals(invite.targetName, requestSlot.captured.name)
@@ -73,10 +75,12 @@ class InviteUserProvisioningJobTest {
 
         every { userProfileInviteRepository.findAll() } returns listOf(invite)
         every { userProfileService.existsByEmail(invite.targetUserEmail) } returns true
+        every { userProfileInviteRepository.deleteAll(listOf(invite)) } returns Unit
 
         job.provisionUsersFromInvites()
 
         verify(exactly = 0) { userProfileService.createUserProfile(any()) }
         verify(exactly = 0) { userProfileService.setAccessTokenForUser(any(), any()) }
+        verify(exactly = 1) { userProfileInviteRepository.deleteAll(listOf(invite)) }
     }
 }
