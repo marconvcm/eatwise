@@ -6,7 +6,8 @@ A full-stack mobile application for tracking daily food and calorie intake, feat
 
 EatWise is built to help users manage their diet by tracking food entries. It includes features for setting daily limits, monitoring progress, and an admin dashboard for usage reporting.
 
-<video src="./Demo.mp4" controls width="100%"></video>
+[Watch the Demo Video](./Demo.mp4)
+<video src="./Demo.mp4" controls width="600"></video>
 
 ### Key Features
 - **Food Tracking**: Log meals with date, time, food name, and calorie count.
