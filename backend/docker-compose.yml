@@ -1,19 +1,23 @@
+version: '3.8'
+
 services:
   db:
-    image: postgres:17-alpine
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: eatwise
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./.pgdata:/var/lib/postgresql/data
-
-  adminer:
-    image: adminer
+    image: postgres:15-alpine
     restart: always
-    links:
-      - db:db
+    environment:
+      - POSTGRES_DB=${DB_NAME:-eatwisedb}
+      - POSTGRES_USER=${DB_USER:-eatwiseuser}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-eatwisepass}
     ports:
-      - 9090:8080
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - eatwise-network
+
+volumes:
+  db-data:
+
+networks:
+  eatwise-network:
+    driver: bridge
