@@ -15,9 +15,9 @@ spring:
                 - StripPrefix=1
                 - AddRequestParameter=api_key,VZIGxejUh7NONXlgsMvTLehdswCrEDHuPYNHSIU0
   datasource:
-    url: jdbc:postgresql://localhost:5432/eatwise
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/eatwisedb
+    username: eatwiseuser
+    password: eatwisepass
     driver-class-name: org.postgresql.Driver
 
   mail:
