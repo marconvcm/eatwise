@@ -21,7 +21,10 @@ data class LedgerEntry(
     val calories: Double,
     @field:NotBlank(message = "Subject cannot be blank")
     val subject: String,
-    val registrationDate: LocalDateTime
+    @field:PastOrPresent(message = "Registration date cannot be in the future")
+    val registrationDate: LocalDateTime,
+    @Column(nullable = true)
+    val dummy: String? = null
 )
 
 

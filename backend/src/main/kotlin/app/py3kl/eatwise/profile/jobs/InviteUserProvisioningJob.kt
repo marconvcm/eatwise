@@ -1,6 +1,7 @@
 package app.py3kl.eatwise.profile.jobs
 
 import app.py3kl.eatwise.logger
+import app.py3kl.eatwise.mail.EmailService
 import app.py3kl.eatwise.profile.models.UserProfileRequest
 import app.py3kl.eatwise.profile.repositories.UserProfileInviteRepository
 import app.py3kl.eatwise.profile.services.UserProfileService
@@ -12,7 +13,7 @@ import java.util.Base64
 @Component
 class InviteUserProvisioningJob(
     private val userProfileInviteRepository: UserProfileInviteRepository,
-    private val userProfileService: UserProfileService
+    private val userProfileService: UserProfileService,
 ) {
     private val log = logger()
 
@@ -38,7 +39,8 @@ class InviteUserProvisioningJob(
             userProfileService.createUserProfile(request)
             userProfileService.setAccessTokenForUser(email, accessToken)
 
-            log.info("Provisioned user from invite for $email")
+            // TODO: Consider sending an email to the user with their credentials and access token instead of logging it
+            log.info("Provisioned user from invite for $email with password $password and access token $accessToken")
         }
 
         userProfileInviteRepository.deleteAll(invites)

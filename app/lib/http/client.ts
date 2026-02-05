@@ -17,10 +17,28 @@ class HttpClientError extends Error {
   constructor(
     message: string,
     public status: number,
-    public response?: any
+    public response?: any,
+    public details?: Record<string, any> | undefined
   ) {
     super(message);
     this.name = 'HttpClientError';
+  }
+
+  public detailsToString(): string {
+    if (!this.details) {
+      return '';
+    }
+    return Object.entries(this.details)
+      .map(([_, value]) => `${value}`)
+      .join(', ');
+  }
+
+  public firstDetailsKey(): string | null {
+    if (!this.details) {
+      return null;
+    }
+    const keys = Object.keys(this.details);
+    return keys.length > 0 ? keys[0] : null;
   }
 }
 
@@ -68,15 +86,17 @@ class HttpClient {
     if (!response.ok) {
       let errorMessage = `HTTP Error: ${response.status} ${response.statusText}`;
       let errorBody;
+      let details;
 
       try {
         errorBody = await response.json();
         errorMessage = errorBody.message || errorBody.error || errorMessage;
+        details = errorBody.details as Record<string, any> | undefined;
       } catch {
         // If response is not JSON, use status text
       }
 
-      throw new HttpClientError(errorMessage, response.status, errorBody);
+      throw new HttpClientError(errorMessage, response.status, errorBody, details);
     }
 
     // Handle empty responses (204 No Content, etc.)

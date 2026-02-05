@@ -2,9 +2,10 @@ import FormWizard from '@/components/FormWizard';
 import { useAppServices } from '@/context';
 import { LedgerEntryForm } from '@/forms/LedgerEntryForm';
 import { FoodSearchService } from '@/lib/food';
+import { HttpClientError } from '@/lib/http';
 import { LedgerEntryRequest } from '@/lib/ledger';
 import type { LedgerEntry } from '@/lib/ledger/types/LedgerEntry';
-import { Modal } from 'react-native';
+import { Alert, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface LedgerEntryModalProps {
@@ -43,7 +44,7 @@ export default function LedgerEntryModal({
       }
    };
 
-   const handleWizardResult = async (data: LedgerEntryRequest, dataId?: string | number) => {
+   const handleWizardResult = async (data: LedgerEntryRequest, dataId?: string | number): Promise<[string | null, boolean]> => {
       try {
          if (dataId) {
             await service.updateEntry(dataId.toString(), data);
@@ -52,8 +53,22 @@ export default function LedgerEntryModal({
          }
          onClose();
          onSuccess?.();
-      } catch (error) {
-         console.error('Failed to save entry:', error);
+         return [null, true];
+      } catch (error: HttpClientError | any) {
+         Alert.alert(
+            'Error',
+            `${error.detailsToString()}`,
+            [{ text: 'OK' }]
+         );
+         
+         if (error instanceof HttpClientError) {
+            const firstKey = error.firstDetailsKey();
+            if (firstKey) {
+               return [firstKey, false];
+            }
+         }
+         
+         return [null, false];
       }
    };
 
@@ -86,13 +101,13 @@ export default function LedgerEntryModal({
                   }
                   return { ...currentData };
                }}
-               onSubmit={(data, dataId) => {
+               onSubmit={async (data, dataId) => {
                   const submitData: LedgerEntryRequest = {
                      subject: data.subject as string,
                      calories: Number(data.calories),
                      registrationDate: currentDay + 'T' + data.asOf,
                   };
-                  handleWizardResult(submitData, dataId);
+                  return handleWizardResult(submitData, dataId);
                }}
                onCancel={onClose}
             />

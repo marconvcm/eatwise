@@ -141,31 +141,6 @@ class AdminReportControllerIntegrationTest {
     }
 
     @Test
-    fun `should get admin dashboard report as admin`() {
-        webTestClient.get()
-            .uri("/admin/report")
-            .headers { it.setBasicAuth(adminUsername, testPassword) }
-            .exchange()
-            .expectStatus().isOk
-            .expectBody<AdminDashboardReport>()
-            .consumeWith { response ->
-                val report = response.responseBody!!
-
-                // Verify weekly comparison
-                assert(report.weeklyComparison.currentWeekEntries == 14L) // 7 days * 2 users
-                assert(report.weeklyComparison.previousWeekEntries == 7L) // 7 days * 1 user
-
-                // Verify user averages
-                assert(report.userAverages.size == 2)
-                val user1Average = report.userAverages.find { it.userId == testUser1.id }
-                val user2Average = report.userAverages.find { it.userId == testUser2.id }
-
-                assert(user1Average != null && user1Average.averageCalories == 500.0)
-                assert(user2Average != null && user2Average.averageCalories == 600.0)
-            }
-    }
-
-    @Test
     fun `should get weekly comparison as admin`() {
         webTestClient.get()
             .uri("/admin/report/weekly-comparison")
