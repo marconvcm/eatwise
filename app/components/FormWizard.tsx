@@ -5,7 +5,7 @@ import { Animated, Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput,
 
 type FormWizardProps<T> = {
    form: Partial<Form<T>>;
-   onSubmit: (data: T, dataId?: string | number) => void;
+   onSubmit: (data: T, dataId?: string | number) => Promise<[string | null, boolean]>;
    onCancel?: () => void;
    initialData?: Partial<T>;
    dataId?: string | number;
@@ -24,7 +24,6 @@ export default function FormWizard<T extends Record<string, any>>({
 }: FormWizardProps<T>) {
    const fields = Object.entries(form.fields || {}) as [keyof T, FormField][];
    
-   // Convert time fields from HH:MM format to minutes for internal use
    const processedInitialData = initialData ? { ...initialData } : {};
    if (initialData) {
       fields.forEach(([key, field]) => {
@@ -48,7 +47,6 @@ export default function FormWizard<T extends Record<string, any>>({
    const slideAnim = useRef(new Animated.Value(0)).current;
    const inputRef = useRef<TextInput>(null);
 
-   // Animate on step change
    useEffect(() => {
       fadeAnim.setValue(0);
       slideAnim.setValue(20);
@@ -65,7 +63,6 @@ export default function FormWizard<T extends Record<string, any>>({
             useNativeDriver: true,
          }),
       ]).start(() => {
-         // Auto-focus input after animation completes
          setTimeout(() => {
             if (inputRef.current) {
                inputRef.current.focus();
@@ -73,14 +70,12 @@ export default function FormWizard<T extends Record<string, any>>({
          }, 50);
       });
       
-      // Clear autocomplete suggestions when changing steps
       setAutocompleteSuggestions({});
    }, [currentStep]);
 
    const currentField = fields[currentStep];
    const isLastStep = currentStep === fields.length - 1;
 
-   // Validate a single field
    const validateField = (fieldName: keyof T, value: any): string | null => {
       const field = form.fields?.[fieldName];
       if (!field?.validations) return null;
@@ -93,7 +88,6 @@ export default function FormWizard<T extends Record<string, any>>({
       return null;
    };
 
-   // Check if a validation constraint is satisfied
    const isValidConstraint = (constraint: ValidationConstraint, value: any): boolean => {
       switch (constraint.type) {
          case "required":
@@ -119,10 +113,8 @@ export default function FormWizard<T extends Record<string, any>>({
       }
    };
 
-   // Handle field value change
    const handleFieldChange = (fieldName: keyof T, value: any) => {
       setFormData((prev) => ({ ...prev, [fieldName]: value }));
-      // Clear error when user starts typing
       if (errors[fieldName as string]) {
          setErrors((prev) => {
             const newErrors = { ...prev };
@@ -132,8 +124,7 @@ export default function FormWizard<T extends Record<string, any>>({
       }
    };
 
-   // Handle next button
-   const handleNext = () => {
+   const handleNext = async () => {
       if (!currentField) return;
 
       const [fieldName, fieldConfig] = currentField;
@@ -146,7 +137,6 @@ export default function FormWizard<T extends Record<string, any>>({
       }
 
       if (isLastStep) {
-         // Convert time fields from minutes to HH:MM format before submitting
          const formattedData = { ...formData };
          fields.forEach(([key, field]) => {
             if (field.type === 'time' && formattedData[key] !== undefined) {
@@ -157,24 +147,39 @@ export default function FormWizard<T extends Record<string, any>>({
             }
          });
          setIsSubmitting(true);
-         onSubmit(formattedData as T, dataId);
+         try {
+            const [errorField, success] = await onSubmit(formattedData as T, dataId);
+            
+            if (!success) {
+               setTimeout(() => { 
+                  setIsSubmitting(false);
+                  
+                  if (errorField) {
+                     const errorFieldIndex = fields.findIndex(([key]) => key === errorField);
+                     if (errorFieldIndex !== -1) {
+                        setCurrentStep(errorFieldIndex);
+                        setErrors({ [errorField as string]: "An error occurred with this field" });
+                     }
+                  }
+               }, 100);
+            }
+         } catch (error) {
+            setIsSubmitting(false);
+         }
       } else {
          setCurrentStep((prev) => prev + 1);
       }
    };
 
-   // Handle back button
    const handleBack = () => {
       if (currentStep > 0) {
          setCurrentStep((prev) => prev - 1);
       }
    };
 
-   // Render input based on field type
    const renderField = (fieldName: keyof T, field: FormField) => {
       const value = formData[fieldName];
 
-      // Helper for number increment/decrement
       const handleNumberChange = (increment: boolean) => {
          const currentValue = (value as number) || field.boundaries?.min || 0;
          const step = field.boundaries?.step || 1;
@@ -297,25 +302,21 @@ export default function FormWizard<T extends Record<string, any>>({
             );
 
          case "time":
-            // Helper for time increment/decrement with wrap-around
             const handleTimeChange = (increment: boolean) => {
-               // Value is stored as total minutes (0-1439)
                const currentMinutes = (value as number) || 0;
-               const step = field.boundaries?.step || 1; // step in minutes
+               const step = field.boundaries?.step || 1;
                
                let newMinutes = increment ? currentMinutes + step : currentMinutes - step;
                
-               // Wrap around: 0-1439 (24 hours * 60 minutes - 1)
                if (newMinutes < 0) {
-                  newMinutes = 1440 + newMinutes; // wrap to end of day
+                  newMinutes = 1440 + newMinutes;
                } else if (newMinutes >= 1440) {
-                  newMinutes = newMinutes - 1440; // wrap to start of day
+                  newMinutes = newMinutes - 1440;
                }
                
                handleFieldChange(fieldName, newMinutes);
             };
             
-            // Convert minutes to HH:MM format
             const minutesToTimeString = (minutes: number): string => {
                if (minutes === undefined || minutes === null) return "00:00";
                const hours = Math.floor(minutes / 60);
@@ -323,7 +324,6 @@ export default function FormWizard<T extends Record<string, any>>({
                return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
             };
             
-            // Convert HH:MM format to minutes
             const timeStringToMinutes = (timeStr: string): number => {
                const [hours, mins] = timeStr.split(':').map(Number);
                return hours * 60 + mins;

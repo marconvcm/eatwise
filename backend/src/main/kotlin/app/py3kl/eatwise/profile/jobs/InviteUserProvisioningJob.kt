@@ -14,7 +14,6 @@ import java.util.Base64
 class InviteUserProvisioningJob(
     private val userProfileInviteRepository: UserProfileInviteRepository,
     private val userProfileService: UserProfileService,
-    private val emailService: EmailService
 ) {
     private val log = logger()
 

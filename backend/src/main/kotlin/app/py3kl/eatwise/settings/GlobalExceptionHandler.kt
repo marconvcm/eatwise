@@ -2,15 +2,19 @@ package app.py3kl.eatwise.settings
 
 import app.py3kl.eatwise.logger
 import app.py3kl.eatwise.profile.services.InviteException
+import jakarta.persistence.RollbackException
+import jakarta.validation.ConstraintViolationException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authorization.AuthorizationDeniedException
+import org.springframework.transaction.TransactionSystemException
 import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.server.ResponseStatusException
+import kotlin.toString
 
 @RestControllerAdvice
 class GlobalExceptionHandler {
@@ -62,6 +66,57 @@ class GlobalExceptionHandler {
 
         return ResponseEntity.status(ex.statusCode).body(errorResponse)
     }
+
+    @ExceptionHandler(TransactionSystemException::class)
+    fun handleTransactionSystemException(ex: TransactionSystemException): ResponseEntity<ErrorResponse> {
+        log.warn("Transaction system exception: ${ex.message}")
+
+        var cause: Throwable? = ex
+        var constraintEx: ConstraintViolationException? = null
+        while (cause != null) {
+            when (cause) {
+                is ConstraintViolationException -> {
+                    constraintEx = cause
+                    break
+                }
+                is RollbackException -> {
+                    val inner = cause.cause
+                    if (inner is ConstraintViolationException) {
+                        constraintEx = inner
+                        break
+                    }
+                }
+            }
+            cause = cause.cause
+        }
+
+        if (constraintEx != null) {
+            val errors = constraintEx.constraintViolations
+                .groupBy(
+                    { it.propertyPath.toString().ifEmpty { it.rootBeanClass?.simpleName ?: "object" } },
+                    { it.message }
+                )
+                .mapValues { (_, msgs) -> if (msgs.size == 1) msgs.first() else msgs.joinToString(", ") }
+
+            val errorResponse = ErrorResponse(
+                status = HttpStatus.BAD_REQUEST.value(),
+                error = "Validation Failed",
+                message = "Database constraint violations",
+                details = errors
+            )
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse)
+        }
+
+        val errorResponse = ErrorResponse(
+            status = 400,
+            error = "Bad Request",
+            message = ex.originalException?.message ?: "A database error occurred"
+        )
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse)
+    }
+
 
     @ExceptionHandler(IllegalArgumentException::class)
     fun handleIllegalArgumentException(ex: IllegalArgumentException): ResponseEntity<ErrorResponse> {
