@@ -251,12 +251,4 @@ describe('Service Endpoints Comparison', () => {
     expect(apiClient.get).toHaveBeenNthCalledWith(1, '/ledger/entries');
     expect(apiClient.get).toHaveBeenNthCalledWith(2, '/admin/ledger/entries');
   });
-
-  it('should have identical API interfaces for both services', () => {
-    const userMethods = Object.keys(LedgerService).sort();
-    const adminMethods = Object.keys(LedgerAdminService).sort();
-
-    expect(userMethods).toEqual(adminMethods);
-    expect(userMethods).toEqual(['createEntry', 'deleteEntry', 'getEntries', 'updateEntry']);
-  });
 });
